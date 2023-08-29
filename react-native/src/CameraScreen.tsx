@@ -8,8 +8,9 @@ import { FAB } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
 import { actions } from "./store/inventory";
+import { StackParamList } from "./App";
 
-export default (props: StackScreenProps<{}>) => {
+export default (props: StackScreenProps<StackParamList, 'Camera'>) => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const dispatch = useDispatch();
 
@@ -31,7 +32,9 @@ export default (props: StackScreenProps<{}>) => {
         style={{ flex: 1 }}
         onBarCodeScanned={(code) =>
           dispatch(
-            actions.sendInventory(code.data, () => props.navigation.goBack())
+            actions.sendInventory(code.data, () => {
+              props.navigation.navigate("Home");
+            })
           )
         }
         // barCodeTypes={[
