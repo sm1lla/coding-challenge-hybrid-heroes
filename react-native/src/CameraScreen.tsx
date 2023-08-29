@@ -9,16 +9,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
 import { actions } from "./store/inventory";
 
-
 export default (props: StackScreenProps<{}>) => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const checkPermissions = async() => {
+    const checkPermissions = async () => {
       const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === "granted" )
-    }
+      setHasPermission(status === "granted");
+    };
     checkPermissions();
   }, []);
 
@@ -30,7 +29,11 @@ export default (props: StackScreenProps<{}>) => {
     return (
       <Camera
         style={{ flex: 1 }}
-        onBarCodeScanned={code => dispatch(actions.sendInventory(code.data, () => props.navigation.goBack()))}
+        onBarCodeScanned={(code) =>
+          dispatch(
+            actions.sendInventory(code.data, () => props.navigation.goBack())
+          )
+        }
         // barCodeTypes={[
         //     BarCodeScanner.Constants.BarCodeType.upc_a,
         //     BarCodeScanner.Constants.BarCodeType.upc_e,
@@ -58,7 +61,7 @@ export default (props: StackScreenProps<{}>) => {
       </Camera>
     );
   }
-}
+};
 
 const styles = StyleSheet.create({
   fab: {

@@ -7,7 +7,12 @@ import { configureStore } from "./store";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-const Stack = createStackNavigator();
+export type StackParamList = {
+  Home: undefined;
+  Camera: undefined;
+};
+
+const Stack = createStackNavigator<StackParamList>();
 const store = configureStore();
 
 export default () => (
