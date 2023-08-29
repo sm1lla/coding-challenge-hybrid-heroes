@@ -23,6 +23,9 @@ The backend is a REST API provided by Airtable.
 
 Project management has created tasks related to the app and put them on the Kanban board. Pick an implementation and try to solve one of the tasks within a reasonable amount of time (~2h).
 
+## Submission
+
+Please upload your submission to a public GitHub or GitLab repository, and share the link with us.
 
 ---
 
@@ -40,6 +43,7 @@ Project management has created tasks related to the app and put them on the Kanb
 - Show image
 - If image is missing, show a placeholder
 - Show categories as individual "Tags" 
+- Support the collapsing and expanding of the item, as displayed in the design
 
 **Tipp:** 
 All product data is provided by the inventory state. Use the design prototype to inspect design requirements as well as to export image assets.
