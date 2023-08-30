@@ -7,15 +7,15 @@ import { selectors, actions } from "./store/inventory";
 import { RootState } from "./store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackScreenProps } from "@react-navigation/stack";
+import { StackParamList } from "./App";
 
-
-export default (props: StackScreenProps<{}>) => {
+export default (props: StackScreenProps<StackParamList, "Home">) => {
   const fetching = useSelector((state: RootState) => state.inventory.fetching);
   const inventory = useSelector(selectors.selectInventory);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = props.navigation.addListener('focus', () => {
+    const unsubscribe = props.navigation.addListener("focus", () => {
       dispatch(actions.fetchInventory());
     });
     return unsubscribe;
@@ -44,9 +44,7 @@ export default (props: StackScreenProps<{}>) => {
             </DataTable.Header>
             {inventory.map((record, index) => (
               <DataTable.Row key={index}>
-                <DataTable.Cell>
-                  {record.fields["Product Code"]}
-                </DataTable.Cell>
+                <DataTable.Cell>{record.fields["Product Code"]}</DataTable.Cell>
                 <DataTable.Cell numeric>
                   {new Date(record.fields.Posted).toLocaleDateString()}{" "}
                   {new Date(record.fields.Posted).toLocaleTimeString()}
@@ -60,11 +58,7 @@ export default (props: StackScreenProps<{}>) => {
       <SafeAreaView style={styles.fab}>
         <FAB
           icon={() => (
-            <MaterialCommunityIcons
-              name="barcode"
-              size={24}
-              color="#0B5549"
-            />
+            <MaterialCommunityIcons name="barcode" size={24} color="#0B5549" />
           )}
           label="Scan Product"
           onPress={() => props.navigation.navigate("Camera")}
@@ -72,7 +66,7 @@ export default (props: StackScreenProps<{}>) => {
       </SafeAreaView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   fab: {

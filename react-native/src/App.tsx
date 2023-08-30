@@ -6,13 +6,20 @@ import { Provider } from "react-redux";
 import { configureStore } from "./store";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
-const Stack = createStackNavigator();
+export type StackParamList = {
+  Home: undefined;
+  Camera: undefined;
+};
+
+const Stack = createStackNavigator<StackParamList>();
 const store = configureStore();
 
 export default () => (
   <Provider store={store}>
     <SafeAreaProvider>
+      <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Home"
