@@ -21,7 +21,7 @@ The backend is a REST API provided by Airtable.
 
 ## Tasks
 
-Project management has created tasks related to the app and put them on the Kanban board. Pick an implementation and try to solve one of the tasks within a reasonable amount of time (~2h).
+Project management has created tasks related to the app and put them on the Kanban board. Pick an implementation and try to solve the task assigned to you  within a reasonable amount of time (~2h).
 
 ## Submission
 
