@@ -1,6 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
-// import { BarCodeScanner } from "expo-barcode-scanner";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { FAB } from "react-native-paper";
@@ -37,14 +36,6 @@ export default (props: StackScreenProps<StackParamList, "Camera">) => {
             })
           )
         }
-        // barCodeTypes={[
-        //     BarCodeScanner.Constants.BarCodeType.upc_a,
-        //     BarCodeScanner.Constants.BarCodeType.upc_e,
-        //     BarCodeScanner.Constants.BarCodeType.upc_ean,
-        //     BarCodeScanner.Constants.BarCodeType.ean13,
-        //     BarCodeScanner.Constants.BarCodeType.ean8
-        //   ]
-        // }
       >
         <View style={styles.fab}>
           <SafeAreaView>
