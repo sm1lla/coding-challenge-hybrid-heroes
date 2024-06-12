@@ -1,7 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
-import { Camera } from "expo-camera";
-import { BarCodeScanner } from "expo-barcode-scanner";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { FAB } from "react-native-paper";
@@ -9,8 +7,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
 import { actions } from "./store/inventory";
 import { StackParamList } from "./App";
+import { CameraView, Camera } from "expo-camera";
 
-export default (props: StackScreenProps<StackParamList, 'Camera'>) => {
+export default (props: StackScreenProps<StackParamList, "Camera">) => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const dispatch = useDispatch();
 
@@ -28,23 +27,15 @@ export default (props: StackScreenProps<StackParamList, 'Camera'>) => {
     return <Text>No access to camera</Text>;
   } else {
     return (
-      <Camera
+      <CameraView
         style={{ flex: 1 }}
-        onBarCodeScanned={(code) =>
+        onBarcodeScanned={(code) =>
           dispatch(
             actions.sendInventory(code.data, () => {
               props.navigation.navigate("Home");
             })
           )
         }
-        // barCodeTypes={[
-        //     BarCodeScanner.Constants.BarCodeType.upc_a,
-        //     BarCodeScanner.Constants.BarCodeType.upc_e,
-        //     BarCodeScanner.Constants.BarCodeType.upc_ean,
-        //     BarCodeScanner.Constants.BarCodeType.ean13,
-        //     BarCodeScanner.Constants.BarCodeType.ean8
-        //   ]
-        // }
       >
         <View style={styles.fab}>
           <SafeAreaView>
@@ -61,7 +52,7 @@ export default (props: StackScreenProps<StackParamList, 'Camera'>) => {
             />
           </SafeAreaView>
         </View>
-      </Camera>
+      </CameraView>
     );
   }
 };
