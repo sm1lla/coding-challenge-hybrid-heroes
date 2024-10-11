@@ -47,7 +47,7 @@ Please upload your submission to a public GitHub or GitLab repository, and share
 
 
 **Tipp:**
-All product data is provided by the inventory state. Use the design prototype to inspect design specifications as well as to export any image assets that are required. Pay attention to the exact dimensions, font sizes, colors etc used in the design prototype. The accuracy of the implementation will be reviewed using iOS and Android devices.
+All required product data is already provided by the inventory state. To fully access the design prototype you will need a Figma account. Use the design prototype to inspect design specifications as well as to export any image assets that are required. Pay attention to the exact dimensions, font sizes, colors etc used in the design prototype. The accuracy of the implementation will be reviewed using iOS and Android devices.
 
 **Links:**
 https://www.figma.com/file/K8J4g5y1QnYZonwgFisvXK/Coding-Challenge?node-id=0%3A1
