@@ -1,13 +1,14 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useEffect } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
-import { Appbar, DataTable, FAB } from "react-native-paper";
+import { Appbar, List, FAB } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { selectors, actions } from "./store/inventory";
 import { RootState } from "./store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackScreenProps } from "@react-navigation/stack";
 import { StackParamList } from "./App";
+import { ProductItem } from "./ProductItem";
 
 export default (props: StackScreenProps<StackParamList, "Home">) => {
   const fetching = useSelector((state: RootState) => state.inventory.fetching);
@@ -37,21 +38,11 @@ export default (props: StackScreenProps<StackParamList, "Home">) => {
         }
       >
         <SafeAreaView edges={["left", "bottom", "right"]}>
-          <DataTable>
-            <DataTable.Header>
-              <DataTable.Title>Product Code</DataTable.Title>
-              <DataTable.Title numeric>Scan Date</DataTable.Title>
-            </DataTable.Header>
+        <List.AccordionGroup >
             {inventory.map((record, index) => (
-              <DataTable.Row key={index}>
-                <DataTable.Cell>{record.fields["Product Code"]}</DataTable.Cell>
-                <DataTable.Cell numeric>
-                  {new Date(record.fields.Posted).toLocaleDateString()}{" "}
-                  {new Date(record.fields.Posted).toLocaleTimeString()}
-                </DataTable.Cell>
-              </DataTable.Row>
+                <ProductItem item={record} id={index.toString()}/>
             ))}
-          </DataTable>
+          </List.AccordionGroup>
         </SafeAreaView>
       </ScrollView>
 
