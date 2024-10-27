@@ -25,62 +25,88 @@ export const ProductItem = (props: GreetingProps) => {
     : [];
 
   return (
-    <List.Accordion
-      title={
-        <View style={{ flexDirection: "row" }}>
-          <View>
-            <Text style={styles.product_name} numberOfLines={1}>
-              {props.item.fields["Product Name"]}
-            </Text>
-            <Text style={styles.product_date}>
-              {new Date(props.item.fields.Posted).toLocaleDateString()}
-            </Text>
-          </View>
-          {isNew ? <IconNew /> : <></>}
-        </View>
-      }
-      id={props.id}
-      left={() => (
-        <View style={{ flex: 1 }}>
-          {imageURL ? (
-            <Image source={{ uri: imageURL }} style={styles.image} />
-          ) : (
-            <PlaceholderSvg width={150} height={150} />
-          )}
-        </View>
-      )}
-      style={{ flex: 1 }}
-    >
-      <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-        {categories.map((category, index) => (
-          <View style={styles.tag}>
-            <Text numberOfLines={1} style={styles.text_tag}>
-              {category}
-            </Text>
-          </View>
-        ))}
+    <View style={styles.container}>
+      <View style={{ flex: 1 }}>
+        {imageURL ? (
+          <Image source={{ uri: imageURL }} style={styles.image} />
+        ) : (
+          <PlaceholderSvg style={styles.image} />
+        )}
       </View>
-    </List.Accordion>
+      <View style={styles.accordion_container}>
+        <List.Accordion
+          title={
+            <View style={{}}>
+              <View style={styles.titel}>
+                <Text style={styles.product_name} numberOfLines={1}>
+                  {props.item.fields["Product Name"]}
+                </Text>
+                <View style={{ margin: 5 }}>{isNew ? <IconNew /> : null}</View>
+              </View>
+              <Text style={styles.product_date}>
+                {new Date(props.item.fields.Posted).toLocaleDateString()}
+              </Text>
+            </View>
+          }
+          id={props.id}
+          style={styles.accordion}
+        >
+          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+            {categories.map((category, index) => (
+              <View style={styles.tag}>
+                <Text numberOfLines={1} style={styles.text_tag}>
+                  {category}
+                </Text>
+              </View>
+            ))}
+          </View>
+        </List.Accordion>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  product_name: {},
-  product_date: {},
+  container: {
+    flexDirection: "row",
+    flex: 1,
+    borderRadius: 4,
+    padding: 8,
+    margin: 6,
+    backgroundColor: "#F8F9FC",
+    shadowColor: "#1B263340",
+    shadowOpacity: 0.25,
+    shadowRadius: 3
+  },
+  accordion_container: { flex: 3, backgroundColor: "#F8F9FC" },
+  accordion: { backgroundColor: "#F8F9FC" },
+  product_name: { fontFamily: "Roboto", fontSize: 20, fontWeight: "900" },
+  product_date: { fontFamily: "Roboto", fontSize: 12, fontWeight: "400" },
   image: {
-    flex: 1
+    flex: 1,
+    width: 85,
+    resizeMode: "cover"
   },
   tag: {
     width: "30%",
     height: 26,
-    backgroundColor: "#D4E5FF", // light blue color
+    backgroundColor: "#D4E5FF",
     borderRadius: 48, // rounded edges
-    paddingTop: 2, // spacing inside the box
+    paddingTop: 2,
     paddingVertical: 2,
     paddingHorizontal: 12,
-    margin: 3
+    margin: 3,
+    justifyContent: "center"
   },
   text_tag: {
-    fontSize: 12
+    fontFamily: "Roboto",
+    fontSize: 12,
+    fontWeight: "400"
+  },
+  titel: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingRight: 50
   }
 });
