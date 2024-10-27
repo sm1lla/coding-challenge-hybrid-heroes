@@ -10,19 +10,30 @@ type GreetingProps = {
   id: string;
 };
 
+const isOneWeekOld = (date: Date) => {
+  const currentDate = new Date();
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(currentDate.getDate() - 7);
+  return date > sevenDaysAgo;
+};
+
 export const ProductItem = (props: GreetingProps) => {
   const imageURL: string = props.item.fields["Product Image"];
+  const isNew: boolean = isOneWeekOld(new Date(props.item.fields.Posted));
+
   return (
     <List.Accordion
       title={
-        <View>
-          <Text style={styles.product_name} numberOfLines={1}>
-            {props.item.fields["Product Name"]}
-          </Text>
-          <Text style={styles.product_date}>
-            {new Date(props.item.fields.Posted).toLocaleDateString()}
-          </Text>
-          <IconNew />
+        <View style={{ flexDirection: "row" }}>
+          <View>
+            <Text style={styles.product_name} numberOfLines={1}>
+              {props.item.fields["Product Name"]}
+            </Text>
+            <Text style={styles.product_date}>
+              {new Date(props.item.fields.Posted).toLocaleDateString()}
+            </Text>
+          </View>
+          {isNew ? <IconNew /> : null}
         </View>
       }
       id={props.id}
