@@ -20,6 +20,9 @@ const isOneWeekOld = (date: Date) => {
 export const ProductItem = (props: GreetingProps) => {
   const imageURL: string = props.item.fields["Product Image"];
   const isNew: boolean = isOneWeekOld(new Date(props.item.fields.Posted));
+  const categories: string[] = props.item.fields["Product Categories"]
+    ? props.item.fields["Product Categories"].split(", ")
+    : [];
 
   return (
     <List.Accordion
@@ -33,7 +36,7 @@ export const ProductItem = (props: GreetingProps) => {
               {new Date(props.item.fields.Posted).toLocaleDateString()}
             </Text>
           </View>
-          {isNew ? <IconNew /> : null}
+          {isNew ? <IconNew /> : <></>}
         </View>
       }
       id={props.id}
@@ -48,7 +51,15 @@ export const ProductItem = (props: GreetingProps) => {
       )}
       style={{ flex: 1 }}
     >
-      <Text>{props.item.fields["Product Name"]}</Text>
+      <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+        {categories.map((category, index) => (
+          <View style={styles.tag}>
+            <Text numberOfLines={1} style={styles.text_tag}>
+              {category}
+            </Text>
+          </View>
+        ))}
+      </View>
     </List.Accordion>
   );
 };
@@ -58,5 +69,18 @@ const styles = StyleSheet.create({
   product_date: {},
   image: {
     flex: 1
+  },
+  tag: {
+    width: "30%",
+    height: 26,
+    backgroundColor: "#D4E5FF", // light blue color
+    borderRadius: 48, // rounded edges
+    paddingTop: 2, // spacing inside the box
+    paddingVertical: 2,
+    paddingHorizontal: 12,
+    margin: 3
+  },
+  text_tag: {
+    fontSize: 12
   }
 });
