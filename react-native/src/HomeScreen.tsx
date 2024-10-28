@@ -29,7 +29,7 @@ export default (props: StackScreenProps<StackParamList, "Home">) => {
       </Appbar.Header>
 
       <ScrollView
-        style={{ flex: 1, backgroundColor: "#ffffff", padding: 16 }}
+        style={styles.scrollView}
         refreshControl={
           <RefreshControl
             refreshing={fetching}
@@ -40,7 +40,7 @@ export default (props: StackScreenProps<StackParamList, "Home">) => {
         <SafeAreaView edges={["left", "bottom", "right"]}>
           <List.AccordionGroup>
             {inventory.map((record, index) => (
-              <ProductItem item={record} id={index.toString()} />
+              <ProductItem item={record} id={index.toString()} key={index} />
             ))}
           </List.AccordionGroup>
         </SafeAreaView>
@@ -66,5 +66,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     alignItems: "center"
-  }
+  },
+  scrollView: { flex: 1, backgroundColor: "#ffffff", padding: 16 }
 });

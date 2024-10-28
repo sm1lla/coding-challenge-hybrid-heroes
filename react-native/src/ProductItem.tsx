@@ -51,9 +51,9 @@ export const ProductItem = (props: GreetingProps) => {
           id={props.id}
           style={styles.accordion}
         >
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          <View style={styles.categories}>
             {categories.map((category, index) => (
-              <View style={styles.tag}>
+              <View style={styles.tag} key={index}>
                 <Text numberOfLines={1} style={styles.text_tag}>
                   {category}
                 </Text>
@@ -108,5 +108,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingRight: 50
+  },
+  categories: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    paddingLeft: 12
   }
 });
